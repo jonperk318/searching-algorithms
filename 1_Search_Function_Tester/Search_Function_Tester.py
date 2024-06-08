@@ -33,12 +33,6 @@ def binary_search(arr:list, x:int, low:int, high:int):
 
     return -1
 
-
-file = open("input_1000.txt", "r")
-input = file.read()
-file.close()
-input = [eval(i) for i in input]
-
 def compare_searches(input:list, trials:int):
 
     # This funciton finds the time it takes to find x using each search algorithm
@@ -64,6 +58,18 @@ def compare_searches(input:list, trials:int):
             binary_times.append(toc-tic)
 
     return linear_times, binary_times
+
+# Reading testing data from input text file
+
+file = open("input_1000.txt", "r")
+input = file.read()
+file.close()
+input = input.split(",")
+if input[-1] == '': # There is an akward comma at the end of this input data, so we remove the last index
+    input.pop()
+input = [eval(i) for i in input]
+
+# Comparing the search functions
 
 linear_times, binary_times = compare_searches(input, 3)
 
