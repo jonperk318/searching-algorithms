@@ -40,8 +40,6 @@ def compare_searches(input:list, trials:int):
     # This funciton finds the time it takes to find x using each search algorithm
     # It returns two lists with the time it takes to find x, one list per search
 
-    sorted_input = input
-    sorted_input.sort()
     linear_times = []
     binary_times = []
 
@@ -49,6 +47,8 @@ def compare_searches(input:list, trials:int):
 
         arr = [] # Create array with 2^n randomly chosen numbers between 0 and 999
         [arr.append(random.choice(range(1000))) for _ in range(2**(trial+4))]
+        sorted_arr = arr
+        sorted_arr.sort() # Sorting the array for binary search
 
         tic = time.perf_counter() # Record time before trial
         [linear_search(arr, i) for i in input]
@@ -56,7 +56,7 @@ def compare_searches(input:list, trials:int):
         linear_times.append(toc-tic) # Create array with time it took to compute each trial
 
         tic = time.perf_counter()
-        [binary_search(arr, i, 0, len(arr)-1) for i in sorted_input]    
+        [binary_search(sorted_arr, i, 0, len(arr)-1) for i in input]    
         toc = time.perf_counter()
         binary_times.append(toc-tic)
 
@@ -88,12 +88,11 @@ ax.set_xscale('log')
 ax.set_yscale('log')
 #ax.xaxis.set_major_locator(mticker.FixedLocator(x_axis))
 #ax.set_xticks(x_axis)
-#ax.set_xticks(x_axis)
 ax.set_xlabel('Array Size')
 ax.set_ylabel('Time (seconds)')
 ax.tick_params(axis='both', which='major', labelsize=8)
 ax.tick_params(axis='both', which='minor', labelsize=6)
 ax.legend(loc='upper left', fontsize='xx-small')
 fig.tight_layout()
-#fig.savefig('Search_Functions_Graph_Log_Scale')
+#fig.savefig('Search_Functions_Graph_Log')
 plt.show()
