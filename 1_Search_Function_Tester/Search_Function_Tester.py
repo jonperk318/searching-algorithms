@@ -75,20 +75,25 @@ input = [eval(i) for i in input]
 trials = 16
 linear_times, binary_times = compare_searches(input, trials)
 
-#print(linear_times)
-#print(binary_times)
+print("Linear search times: ", linear_times)
+print("Binary search times: ", binary_times)
 
 # Creating the plot
 fig, ax = plt.subplots(figsize=(4,2))
 x_axis = [2**t for t in range(4, trials+4)]
-print(x_axis)
+print("Array Sizes: ", x_axis)
 ax.plot(x_axis, linear_times,'o', c='#8080FF', alpha=0.9, markeredgecolor='k', label ='Linear Search Times')
 ax.plot(x_axis, binary_times,'o', c='#A020F0', alpha=0.9, markeredgecolor='k', label ='Binary Search Times')
 ax.set_xscale('log')
 ax.set_yscale('log')
 #ax.xaxis.set_major_locator(mticker.FixedLocator(x_axis))
 #ax.set_xticks(x_axis)
+#ax.set_xticks(x_axis)
 ax.set_xlabel('Array Size')
-ax.set_ylabel('Time (seconds')
+ax.set_ylabel('Time (seconds)')
+ax.tick_params(axis='both', which='major', labelsize=8)
+ax.tick_params(axis='both', which='minor', labelsize=6)
+ax.legend(loc='upper left', fontsize='xx-small')
 fig.tight_layout()
+#fig.savefig('Search_Functions_Graph_Log_Scale')
 plt.show()
