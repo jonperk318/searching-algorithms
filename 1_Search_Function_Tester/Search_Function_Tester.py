@@ -1,6 +1,6 @@
 # Imports
 import time
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt; plt.rcParams['figure.dpi'] = 300
 import numpy as np
 import random
 
@@ -73,5 +73,10 @@ input = [eval(i) for i in input]
 
 linear_times, binary_times = compare_searches(input, 3)
 
-print(linear_times)
-print(binary_times)
+#print(linear_times)
+#print(binary_times)
+
+fig, ax = plt.subplots(10, 15)
+ax.plot(len(linear_times), linear_times,'o', alpha=0.7, markeredgecolor='k', label ='X vs y data')
+ax.set_xlabel('X')
+ax.set_ylabel('y')
