@@ -1,6 +1,7 @@
 # Imports
 import time
 import matplotlib.pyplot as plt; plt.rcParams['figure.dpi'] = 300
+import matplotlib.ticker as mticker
 import numpy as np
 import random
 
@@ -33,34 +34,35 @@ def binary_search(arr:list, x:int, low:int, high:int):
 
     return -1
 
+# Comparing linear and binary searches
 def compare_searches(input:list, trials:int):
 
     # This funciton finds the time it takes to find x using each search algorithm
     # It returns two lists with the time it takes to find x, one list per search
 
+    sorted_input = input
+    sorted_input.sort()
     linear_times = []
     binary_times = []
 
     for trial in range(trials):
 
-        arr = random.sample(range(1000), 2**(trial+4))
+        arr = [] # Create array with 2^n randomly chosen numbers between 0 and 999
+        [arr.append(random.choice(range(1000))) for _ in range(2**(trial+4))]
 
-        for i in input:
+        tic = time.perf_counter() # Record time before trial
+        [linear_search(arr, i) for i in input]
+        toc = time.perf_counter() # Record time after trial
+        linear_times.append(toc-tic) # Create array with time it took to compute each trial
 
-            tic = time.perf_counter()
-            linear_search(arr, i)
-            toc = time.perf_counter()
-            linear_times.append(toc-tic)
-
-            tic = time.perf_counter()
-            binary_search(arr, i, 0, len(arr)-1)
-            toc = time.perf_counter()
-            binary_times.append(toc-tic)
+        tic = time.perf_counter()
+        [binary_search(arr, i, 0, len(arr)-1) for i in sorted_input]    
+        toc = time.perf_counter()
+        binary_times.append(toc-tic)
 
     return linear_times, binary_times
 
 # Reading testing data from input text file
-
 file = open("input_1000.txt", "r")
 input = file.read()
 file.close()
@@ -70,13 +72,23 @@ if input[-1] == '': # There is an akward comma at the end of this input data, so
 input = [eval(i) for i in input]
 
 # Comparing the search functions
-
-linear_times, binary_times = compare_searches(input, 3)
+trials = 16
+linear_times, binary_times = compare_searches(input, trials)
 
 #print(linear_times)
 #print(binary_times)
 
-fig, ax = plt.subplots(10, 15)
-ax.plot(len(linear_times), linear_times,'o', alpha=0.7, markeredgecolor='k', label ='X vs y data')
-ax.set_xlabel('X')
-ax.set_ylabel('y')
+# Creating the plot
+fig, ax = plt.subplots(figsize=(4,2))
+x_axis = [2**t for t in range(4, trials+4)]
+print(x_axis)
+ax.plot(x_axis, linear_times,'o', c='#8080FF', alpha=0.9, markeredgecolor='k', label ='Linear Search Times')
+ax.plot(x_axis, binary_times,'o', c='#A020F0', alpha=0.9, markeredgecolor='k', label ='Binary Search Times')
+ax.set_xscale('log')
+ax.set_yscale('log')
+#ax.xaxis.set_major_locator(mticker.FixedLocator(x_axis))
+#ax.set_xticks(x_axis)
+ax.set_xlabel('Array Size')
+ax.set_ylabel('Time (seconds')
+fig.tight_layout()
+plt.show()
