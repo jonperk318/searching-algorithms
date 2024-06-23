@@ -57,6 +57,7 @@ def merge_sort(arr):
 
 # Reading input files
 sample_sizes = [1000, 2500, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000]
+#sample_sizes = [1000, 2500, 5000, 10000, 25000]
 inputs = []
 
 for sample_size in sample_sizes: # Create a list of lists of input samples
@@ -72,9 +73,9 @@ for sample_size in sample_sizes: # Create a list of lists of input samples
     inputs.append(input)
 
 # Simple Test
-test_arr = [2, 9, 101, 3853029342, 5738, 1, 78, 303, 304]
-print(insertion_sort(test_arr))
-print(merge_sort(test_arr))
+#test_arr = [2, 9, 101, 3853029342, 5738, 1, 78, 303, 304]
+#print(insertion_sort(test_arr))
+#print(merge_sort(test_arr))
 
 # Testing Sorting Functions
 sorted_inputs_1 = []
@@ -99,20 +100,20 @@ for input in inputs:
 
 # Plot
 fig, ax = plt.subplots(figsize=(4,2))
-ax.plot(sample_sizes, insertion_times,'o', c='#8080FF', alpha=0.9, markeredgecolor='k', 
+fig.suptitle('Sorting Functions Graph')
+ax.plot(sample_sizes, insertion_times,'o', c='#8080FF', alpha=0.8, markeredgecolor='k', 
         label ='Insertion Sort Times')
-#ax.plot(x_axis, merge_times,'o', c='#A020F0', alpha=0.9, markeredgecolor='k', 
-#       label ='Merge Sort Times')
+ax.plot(sample_sizes, merge_times,'o', c='#A020F0', alpha=0.8, markeredgecolor='k', 
+       label ='Merge Sort Times')
 ax.set_xscale('log')
 ax.set_yscale('log')
 #ax.xaxis.set_major_locator(mticker.FixedLocator(x_axis))
 #ax.set_xticks(x_axis)
-ax.suptitle('Sorting_Functions_Graph')
 ax.set_xlabel('Array Size')
 ax.set_ylabel('Time (seconds)')
 ax.tick_params(axis='both', which='major', labelsize=8)
 ax.tick_params(axis='both', which='minor', labelsize=6)
 ax.legend(loc='upper left', fontsize='xx-small')
 fig.tight_layout()
-fig.savefig('Sorting_Functions_Graph')
+#fig.savefig('Sorting_Functions_Graph')
 plt.show()
