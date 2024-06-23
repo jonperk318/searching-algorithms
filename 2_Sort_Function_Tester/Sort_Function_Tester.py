@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt; plt.rcParams['figure.dpi'] = 300
 import numpy as np
 
 # Insertion Sort
-def insertion_sort(arr):
+def insertion_sort(arr): # each element is checked and put in its proper place in the sorted array
 
     for i in range(1, len(arr)): # skip the 0th index
 
@@ -23,36 +23,38 @@ def insertion_sort(arr):
     return arr
 
 # Merge Sort
-def merge(left, right):
+def merge(left, right): # merges two halves (while going back up the recursive calls)
     
     result = []
     i = 0
     j = 0
     
-    while i < len(left) and j < len(right):
+    while i < len(left) and j < len(right): # loop to compare sorted sub arrays and merge
         
+        # finds if next element of left array is smaller or equal to next element of right array
         if left[i] <= right[j]:
             result.append(left[i])
             i += 1
-        else:
+        else: # if not, the next element of the right array is added
             result.append(right[j])
             j += 1
             
     result += left[i:]
     result += right[j:]
     
-    return result
+    return result # returns merged array
 
 def merge_sort(arr):
+    # recursively breaks array appart until it is a single value, and merges them back together, sorted
     
-    if len(arr) < 2:
+    if len(arr) < 2: # base case
         return arr
     
     mid = len(arr) // 2
-    left = merge_sort(arr[:mid])
+    left = merge_sort(arr[:mid]) # recursive call with both halves of the unsorted array
     right = merge_sort(arr[mid:])
     
-    return merge(left, right)
+    return merge(left, right) # merges sorted arrays
 
 
 # Reading input files
