@@ -3,7 +3,6 @@
 # Imports
 import time
 import matplotlib.pyplot as plt; plt.rcParams['figure.dpi'] = 300
-import numpy as np
 
 # Insertion Sort
 def insertion_sort(arr): # each element is checked and put in its proper place in the sorted array
@@ -45,7 +44,7 @@ def merge(left, right): # merges two halves (while going back up the recursive c
     return result # returns merged array
 
 def merge_sort(arr):
-    # recursively breaks array appart until it is a single value, and merges them back together, sorted
+    # recursively breaks array apart until it is a single value, and merges them back together, sorted
     
     if len(arr) < 2: # base case
         return arr
@@ -97,8 +96,8 @@ for input in inputs:
     toc = time.perf_counter()
     merge_times.append(toc-tic)
 
-#print(sorted_inputs_1)
-#print(sorted_inputs_2)
+print(sorted_inputs_1[0])
+print(sorted_inputs_2[0])
 
 # Plot
 fig, ax = plt.subplots(figsize=(4,2))
@@ -109,8 +108,8 @@ ax.plot(sample_sizes, merge_times,'o', c='#A020F0', alpha=0.8, markeredgecolor='
        label ='Merge Sort Times')
 ax.set_xscale('log')
 ax.set_yscale('log')
-#ax.xaxis.set_major_locator(mticker.FixedLocator(x_axis))
-#ax.set_xticks(x_axis)
+#ax.xaxis.set_major_locator(mticker.FixedLocator(sample_sizes))
+#ax.set_xticks(sample_sizes)
 ax.set_xlabel('Array Size')
 ax.set_ylabel('Time (seconds)')
 ax.tick_params(axis='both', which='major', labelsize=8)
