@@ -6,86 +6,86 @@ using namespace std;
 
 // Merge Sort
 
-void merge(int arr[], int const left, int const mid,
-           int const right) 
+void merge(int arr[], int first, int mid, int last) 
     // helper function that merges left and right halves of arr[]
 {
-    int const subArrayOne = mid - left + 1; 
-    int const subArrayTwo = right - mid; 
+    int const leftLength = mid - first + 1; 
+    int const rightLength = last - mid; 
 
     // Create temp arrays
-    auto *leftArray = new int[subArrayOne],
-         *rightArray = new int[subArrayTwo];
+    auto *leftArray = new int[leftLength], *rightArray = new int[rightLength];
 
     // Copy data to temp arrays leftArray[] and rightArray[]
-    for (auto i = 0; i < subArrayOne; i++) 
-        leftArray[i] = arr[left + i]; // first subarray is arr[begin...mid]
-    for (auto j = 0; j < subArrayTwo; j++)
-        rightArray[j] = arr[mid + 1 + j]; // second subarray is arr[mid+1..end]
+    for (auto i = 0; i < leftLength; i++) 
+        leftArray[i] = arr[first + i]; // first subarray is arr[first...mid]
+    for (auto j = 0; j < rightLength; j++)
+        rightArray[j] = arr[mid + 1 + j]; // second subarray is arr[mid+1..last]
 
-    auto indexOfSubArrayOne = 0, indexOfSubArrayTwo = 0;
-    int indexOfMergedArray = left;
+    auto indexOfLeftLength = 0, indexOfRightLength = 0;
+    int indexOfMergedArray = first;
 
-    // Merge the temp arrays back into array[left..right]
-    while (indexOfSubArrayOne < subArrayOne
-           && indexOfSubArrayTwo < subArrayTwo) {
-        if (leftArray[indexOfSubArrayOne]
-            <= rightArray[indexOfSubArrayTwo]) {
+    // Merge temp arrays back into single array
+    while (indexOfLeftLength < leftLength
+           && indexOfRightLength < rightLength) {
+        if (leftArray[indexOfLeftLength]
+            <= rightArray[indexOfRightLength]) {
             arr[indexOfMergedArray]
-                = leftArray[indexOfSubArrayOne];
-            indexOfSubArrayOne++;
+                = leftArray[indexOfLeftLength];
+            indexOfLeftLength++;
         }
         else {
             arr[indexOfMergedArray]
-                = rightArray[indexOfSubArrayTwo];
-            indexOfSubArrayTwo++;
+                = rightArray[indexOfRightLength];
+            indexOfRightLength++;
         }
         indexOfMergedArray++;
     }
 
     // Copy the remaining elements of
     // left[], if there are any
-    while (indexOfSubArrayOne < subArrayOne) {
+    while (indexOfLeftLength < leftLength) {
         arr[indexOfMergedArray]
-            = leftArray[indexOfSubArrayOne];
-        indexOfSubArrayOne++;
+            = leftArray[indexOfLeftLength];
+        indexOfLeftLength++;
         indexOfMergedArray++;
     }
 
     // Copy the remaining elements of
     // right[], if there are any
-    while (indexOfSubArrayTwo < subArrayTwo) {
+    while (indexOfRightLength < rightLength) {
         arr[indexOfMergedArray]
-            = rightArray[indexOfSubArrayTwo];
-        indexOfSubArrayTwo++;
+            = rightArray[indexOfRightLength];
+        indexOfRightLength++;
         indexOfMergedArray++;
     }
     delete[] leftArray;
     delete[] rightArray;
 }
 
-void mergeSort(int arr[], int const begin, int const end)
+void mergeSort(int arr[], int const first, int const last)
 {
-    if (begin >= end) // begin and end are left and right indices of sub-array of arr
+    if (first >= last) { // the first index cannot be larger than the last index
+        cout << "Error: length of array cannot be less than 0";
         return;
+        }
 
-    int mid = begin + (end - begin) / 2;
-    mergeSort(arr, begin, mid);
-    mergeSort(arr, mid + 1, end);
-    merge(arr, begin, mid, end);
+    int mid = first + (last - first) / 2;
+    mergeSort(arr, first, mid);
+    mergeSort(arr, mid + 1, last);
+    merge(arr, first, mid, last);
 }
 
 // Quick Sort
 
-int partition(int arr[], int low, int high)
+int partition(int arr[], int first, int last)
   // helper function to choose the pivot
 {
-  int pivot = arr[high];
+  int pivot = arr[last];
   //Index of smaller element and Indicate
   //the right position of pivot found so far
-  int i = (low - 1);
+  int i = (first - 1);
   
-  for(int j = low; j <= high - 1; j++)
+  for(int j = first; j <= last - 1; j++)
   {
     //If current element is smaller than the pivot
     if(arr[j] < pivot)
@@ -95,7 +95,7 @@ int partition(int arr[], int low, int high)
       swap(arr[i], arr[j]);
     }
   }
-  swap(arr[i + 1], arr[high]);
+  swap(arr[i + 1], arr[last]);
   return i + 1;
 }
            
