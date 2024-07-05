@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+
 using namespace std;
 
 
@@ -63,9 +66,10 @@ void merge(int arr[], int first, int mid, int last)
 }
 
 void mergeSort(int arr[], int const first, int const last)
+    // divide and conquer algorithm with O(nlog(n)) time complexity
 {
-    if (first >= last) { // the first index cannot be larger than the last index
-        cout << "Error: length of array cannot be less than 0";
+    if (first >= last) { // the array cannot be empty or have negative length
+        cout << "Error: length of array has to be greater than 0";
         return;
         }
 
@@ -80,42 +84,39 @@ void mergeSort(int arr[], int const first, int const last)
 int partition(int arr[], int first, int last)
   // helper function to choose the pivot
 {
-  int pivot = arr[last];
-  //Index of smaller element and Indicate
-  //the right position of pivot found so far
+  int pivot = arr[last]; // last element is initially selected as the pivot
   int i = (first - 1);
   
   for(int j = first; j <= last - 1; j++)
   {
-    //If current element is smaller than the pivot
+    // check if each element is smaller than the pivot
     if(arr[j] < pivot)
     {
-      //Increment index of smaller element
-      i++;
+      i++; //if so, increment index of smaller element
       swap(arr[i], arr[j]);
     }
   }
   swap(arr[i + 1], arr[last]);
-  return i + 1;
+  return i + 1; // return index of pivot
 }
            
-void quickSort(int arr[], int low, int high)
+void quickSort(int arr[], int first, int last)
+    // divide and conquer algorithm with O(nlog(n)) time complexity
 {
-  if(low < high)
-  {    
-    int pivot = partition(arr, low, high); // index of pivot
-    
-    // Recursive quicksort call
-    // element smaller than pivot goes left, larger element goes right
-    quickSort(arr, low, pivot - 1);
-    quickSort(arr, pivot + 1, high);
-  }
+    if (first >= last) { // the array cannot be empty or have negative length
+        cout << "Error: length of array has to be greater than 0" << endl;
+        return;
+        }
+
+    int pivot = partition(arr, first, last); // find index of pivot
+    quickSort(arr, first, pivot - 1); // recursive calls to sort both subarrays
+    quickSort(arr, pivot + 1, last);
 }
 
 
 // UTILITY FUNCTIONS
 
-void printArray(int arr[], int size) // Prints all elements of an array
+void printArray(int arr[], int size) // prints all elements of an array
 {
     for (int i = 0; i < size; i++)
         cout << arr[i] << " ";
@@ -141,6 +142,26 @@ int main()
     printArray(testArr, test_arr_size);
     cout << "\nArray sorted by Quick Sort: \n";
     printArray(testArr2, test_arr_size);
+
+
+    // Reading input texts
+
+    int sampleSizes[10] = {1000, 2500, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 1000000};
+
+    for (int size : sampleSizes) {
+
+        auto str = to_string(size);
+        ifstream inputFile("" + str + ".txt");
+
+        if (!inputFile.is_open()) { // there should be no error opening the file
+        cerr << "Error opening the file!" << endl; 
+        return 1; 
+        }
+
+        string line;
+
+
+    }
 
     return 0;
 }
