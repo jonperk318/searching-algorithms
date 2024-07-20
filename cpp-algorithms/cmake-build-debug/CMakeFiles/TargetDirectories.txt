@@ -1,0 +1,3 @@
+/Users/jp/Documents/GitHub.nosync/searching-algorithms/cpp-algorithms/cmake-build-debug/CMakeFiles/cpp_algorithms.dir
+/Users/jp/Documents/GitHub.nosync/searching-algorithms/cpp-algorithms/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jp/Documents/GitHub.nosync/searching-algorithms/cpp-algorithms/cmake-build-debug/CMakeFiles/rebuild_cache.dir
