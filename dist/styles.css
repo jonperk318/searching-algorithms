@@ -1,0 +1,83 @@
+:root {
+    --yellow: #EFCA00;
+    --salmon: #FE433C;
+    --watermelon: #F31D64;
+    --lilac: #A224AD;
+    --purple: #6A38B3;
+    --blue: #3C5081;
+    --light-blue: #0095EF;
+    --black: #0F1416;
+    --space-cadet: #282D40;
+    --davys-gray: #4A495A;
+    --taupe: #83828B;
+    --silver: #BCBCBC;
+}
+
+body {
+    margin: 0;
+    font-family: Verdana, sans-serif;
+    background-color: var(--space-cadet);
+    color: var(--silver);
+}
+
+a {
+    text-decoration: none;
+}
+
+a, a:visited, a:active {
+    color: var(--purple);
+}
+
+.menu {
+    position: fixed;
+    width: 300px;
+    min-height: 100%;
+    background-color: var(--black);
+    z-index: 1000;
+}
+
+.menu h2.title {
+    padding-left: 15px;
+    margin-bottom: 30px;
+}
+.menu a.gitHubLink {
+    padding-left: 15px;
+}
+
+.menu ul#suitesMenu {
+    margin: 20px 0 0 0;
+    padding: 0;
+}
+
+.menu ul#suitesMenu li {
+    list-style-type: none;
+    padding: 15px;
+    font-size: 14px;
+}
+
+.menu ul#suitesMenu li.selected,
+.menu ul#suitesMenu li.selected:hover {
+    background-color: var(--purple);
+    color: var(--silver);
+    cursor: default;
+}
+
+.menu ul#suitesMenu li:hover {
+    background-color: var(--lilac);
+    cursor: pointer;
+    color: var(--black);
+}
+
+.page {
+    height: 90%;
+    width: 100%;
+    position: fixed;
+}
+
+.page .suite {
+    min-width: 600px;
+    min-height: 300px;
+    padding: 30px;
+    height:100%;
+    margin-left: 300px;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "searching-algorithms",
+  "version": "1.0.0",
+  "author": "Jonathan Perkins",
+  "scripts": {
+    "build-site": "webpack -p"
+  },
+  "devDependencies": {
+    "chart.js": "^2.6.0",
+    "webpack": "^5.93.0"
+  },
+  "dependencies": {
+    "nano-time": "^1.0.0",
+    "nanotimer": "^0.3.15"
+  }
+}
