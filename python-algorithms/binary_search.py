@@ -23,7 +23,6 @@ def binary_search_recursive(arr, key, low, high):
         elif arr[mid] <= key:
             return binary_search_recursive(arr, key, mid+1, high)
         
-        else:
-            return binary_search_recursive(arr, key, low, mid-1)
+        return binary_search_recursive(arr, key, low, mid-1)
 
     return -1 # key not found
