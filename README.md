@@ -10,7 +10,6 @@ Languages and packages used:
 * Java 21.0.1
 * C++ Apple Clang 15.0.0 (clang-1500.3.9.4)
 * JavaScript Node 20.15.0
-* * npm 10.7.0
 * * webpack-cli 5.1.4
 
 First, run `./samples/sample_generator.py` to generate 50 sample arrays of logarithmically-spaced sizes from
